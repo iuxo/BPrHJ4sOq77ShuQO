@@ -21,7 +21,7 @@ def main():
         k_train_weekly, k_train_monthly = prep_weekly_monthly(k_train)
         k_test_weekly, k_test_monthly = prep_weekly_monthly(k_test)
 
-        k_test = k_test.reset_index()
+        k_test = k_test.reset_index(drop=True)
 
         # time series
         alpha = 0.05
@@ -36,9 +36,11 @@ def main():
         k_weekly_predict['Predicted'] = predict(k_train_weekly, k_test_weekly)
         # k_monthly_predict['Predicted'] = predict(k_train_monthly, k_test_monthly)
 
+        k_train['Predicted'] = k_train['Price']
+        k_predict = pd.concat((k_predict, k_train.tail(10))).sort_values("Date").reset_index(drop=True)
         # add bollinger bands, signals and plot
 
-        k_train_predictions = bollinger_bands(k_predict, 10, 2)
+        k_train_predictions = bollinger_bands(k_predict, 20, 2)
         k_train_weekly_predictions = bollinger_bands(k_weekly_predict, 5, 2)
         # k_train_monthly_predictions = bollinger_bands(k_monthly_predict, 1, 2)
 
