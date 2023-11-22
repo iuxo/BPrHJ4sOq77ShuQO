@@ -33,3 +33,9 @@ You are given a set of portfolio companies trading data from emerging markets in
 Predict stock price valuations on a daily, weekly and monthly basis. Recommend BUY, HOLD, SELL decisions. Maximize capital returns, minimize losses. Ideally a loss should never happen. Minimize HOLD period.
 
 Project Overview:
+
+My strategy for this project was to use the ARIMA model for predicting stock market prices, I used the rolling forecast method for my ARIMA model. So after every day/week/month, I would feed the model the new data and forecast the next day/week/month. My approach was to use bollinger bands and if the predicted price was above the upper band that would signal a sell, if it was below the lower band it would signal a buy. 
+
+![image](src/plots/001230_daily.png)
+
+This is example for one of the markets. In this case, I would buy on the red signals and sell on the orange signals, and I would be able to make a return on my investment if I followed the trading strategy.
